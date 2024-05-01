@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<title>更新画面</title>
+</head>
+<body>
+	<h1>更新画面</h1>
+	
+	<hr>
+	<h2>更新編集</h2>
+	
+	<form th:action="@{/update}" method="post" th:object="${user}">
+		<label th:text="'id: '+ *{id}">id:	 </label>
+		<br>
+		<label>name: </label>
+			<input type="text" th:field="*{userName}" th:errorclass="is-invalid"><br>
+			<div class="invalid-feedback mt-0" th:errors="*{userName}"></div>
+		<label>mail:  </label>
+			<input type="email" th:field="*{mail}" th:errorclass="is-invalid"><br>
+			<div class="invalid-feedback" th:errors="*{mail}"></div>
+		<label>age:   </label>
+			<input type="number" th:field="*{age}" th:errorclass="is-invalid"><br>
+			<div class="invalid-feedback" th:errors="*{age}"></div>
+		
+		<button type="submit">更新</button>	
+		<div th:if="${result}" class="text-primary">
+			<p th:text="${result}"></p>
+		</div>	
+	</form>	
+	
+	<a href="/index">一覧に戻る</a>		
+</body>
+</html>
