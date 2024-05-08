@@ -13,6 +13,7 @@
 	
 	<form th:action="@{/update}" method="post" th:object="${user}">
 		<label th:text="'id: '+ *{id}">id:	 </label>
+		<input type="hidden" th:field="*{id}">
 		<br>
 		<label>name: </label>
 			<input type="text" th:field="*{userName}" th:errorclass="is-invalid"><br>
@@ -25,6 +26,7 @@
 			<div class="invalid-feedback" th:errors="*{age}"></div>
 		
 		<button type="submit">更新</button>	
+		
 		<div th:if="${result}" class="text-primary">
 			<p th:text="${result}"></p>
 		</div>	

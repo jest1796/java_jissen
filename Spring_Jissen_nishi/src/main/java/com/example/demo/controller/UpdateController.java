@@ -18,24 +18,39 @@ public class UpdateController {
 	
 	@Autowired
 	UserService userService;
+	User user;
 	
+	//更新画面の表示//
 	@GetMapping("/update/{id}")
-	public String getUpdate(@PathVariable("id") Integer id,Model model,
-			User user) {
-		//**更新するユーザデータをDBから取得**//
+	public String getUpdate(@PathVariable("id") Integer id,User user,Model model
+			) {
+		//更新するユーザデータをDBから取得//
 		User editUser = userService.selectOne(id);
+		
 		model.addAttribute("user",editUser);
 		return "update";
 	}
 	
+	//更新処理//
 	@PostMapping("/update")
-	public String postUpdate(Model model,@Validated @ModelAttribute User user,
+	public String postUpdate( Integer id,Model model, @ModelAttribute @Validated User user,
 			BindingResult bindingresult) {
 		
-//		if (bindingresult.hasErrors()) {
-//			return getUpdate(user, model);
-//		}
+		//入力エラーのチェック//
+		if (bindingresult.hasErrors()) {
+			return "update";
+		}
 		
+		//更新処理成否の変数//
+		String result;
+		
+		if (userService.updateOne(user)) {
+			result = "更新しました";
+		}else {
+			result = "更新に失敗しました";
+		}
+		
+		model.addAttribute("result",result);
 		return "update";
 		
 	}

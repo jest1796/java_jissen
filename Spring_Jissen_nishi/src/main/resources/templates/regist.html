@@ -24,6 +24,7 @@
 			<div class="invalid-feedback" th:errors="*{age}"></div>
 		
 		<button type="submit">登録</button>	
+		
 		<div th:if="${result}" class="text-primary">
 			<p th:text="${result}"></p>
 		</div>	

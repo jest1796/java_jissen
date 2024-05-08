@@ -17,13 +17,14 @@ public class IndexController {
 	UserService userService;
 	User user;
 	
+	//一覧画面表示//
 	@GetMapping("/index")
 	public String selectAll(Model model){
-		//**データ一覧取得**//
+		//データ一覧取得//
 		List<User> usersList= userService.selectAll();  
+		
 		model.addAttribute("usersList",usersList);
 		
-		System.out.println(usersList);
 		return "index";
 		
 	}
